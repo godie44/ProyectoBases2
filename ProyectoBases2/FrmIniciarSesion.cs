@@ -10,19 +10,18 @@ using System.Windows.Forms;
 
 namespace ProyectoBases2
 {
-    public partial class FrmPrincipal : Form
+    public partial class FrmIniciarSesion : Form
     {
-        public FrmPrincipal()
+        public FrmIniciarSesion()
         {
             InitializeComponent();
         }
 
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmIniciarSesion frmIniciar = new FrmIniciarSesion();
-            frmIniciar.MdiParent = this;
 
-            frmIniciar.Show();
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LN;
 
 namespace ProyectoBases2
 {
@@ -23,6 +24,20 @@ namespace ProyectoBases2
             frmIniciar.MdiParent = this;
 
             frmIniciar.Show();
+        }
+
+        private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool status = UsuarioLn.SesionStatus();
+
+            if (status)
+            {
+                sesionToolStripMenuItem.Text = "Cerrar Sesion";
+            }
+            else
+            {
+                sesionToolStripMenuItem.Text = "Iniciar Sesion";
+            }
         }
     }
 }

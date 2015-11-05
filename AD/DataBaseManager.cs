@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace AD
 {
-    private class DataBaseManager
+    class DataBaseManager
     {
         private static SqlConnection con;
         
@@ -24,14 +24,17 @@ namespace AD
             }
         }
 
-        public static SqlConnection OpenSqlDatabase(string _user, string _pass,string _server)
+        public static SqlConnection OpenSqlDatabase(string _user, string _pass,string _server,string _db)
         {
             try
             {
 
                 if (con == null || con.State == System.Data.ConnectionState.Closed)
                 {
-                    con = new SqlConnection("Data Source=" + _server + ";User Id=" + _user + ";Password=" + _pass);
+                    string conString = _db.Equals("")?"Data Source=" + _server + ";User Id=" + _user + ";Password=" + _pass :
+                                                      "Data Source=" + _server + ";User Id=" + _user + ";Password=" + _pass+";Initial Catalog="+_db;
+
+                    con = new SqlConnection(conString);
                     con.Open();
                 }
                 return con;

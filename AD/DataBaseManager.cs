@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace AD
 {
-    public class DataBaseManager
+    private class DataBaseManager
     {
         private static SqlConnection con;
         

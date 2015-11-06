@@ -284,7 +284,7 @@ namespace AD
 
 
 
-        public static void RegistrarPermisoRol( _departamento)
+        public static void RegistrarPermisoRol(Permiso_X_Rol _permiso_x_rol)
         {
             try
             {
@@ -292,11 +292,11 @@ namespace AD
                 {
                     using (SqlCommand command = con.CreateCommand())
                     {
-                        command.CommandText = "sp_departamento";
+                        command.CommandText = "sp_permiso_rol";
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@ID_DEPARTAMENTO", _departamento.Id_departamento);
-                        command.Parameters.AddWithValue("@DESC_DEPARTAMENTO", _departamento.Desc_departamento);
+                        command.Parameters.AddWithValue("@ID_ROL", _permiso_x_rol.Rol.Id_rol);
+                        command.Parameters.AddWithValue("@ID_PERMISO", _permiso_x_rol.Rol.Id_rol);
 
 
 
@@ -311,7 +311,58 @@ namespace AD
         }
 
 
+        public static void RegistrarRolesXMenu(Rol_X_Menu _rol_x_menu)
+        {
+            try
+            {
+                using (SqlConnection con = DataBaseManager.OpenSqlDatabase(user, pass, servidor, baseDatos))
+                {
+                    using (SqlCommand command = con.CreateCommand())
+                    {
+                        command.CommandText = "sp_roles_x_menu";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
 
+                        command.Parameters.AddWithValue("@IF_ROL", _rol_x_menu.Rol.Id_rol);
+                        command.Parameters.AddWithValue("@IF_PERMISO", _rol_x_menu.Menu.Id_menu);
+
+
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public static void RegistrarRolesXUsuario(Rol_X_Usuario _rol_x_usuario)
+        {
+            try
+            {
+                using (SqlConnection con = DataBaseManager.OpenSqlDatabase(user, pass, servidor, baseDatos))
+                {
+                    using (SqlCommand command = con.CreateCommand())
+                    {
+                        command.CommandText = "sp_roles_x_menu";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@IF_ROL", _rol_x_usuario.Rol.Id_rol);
+                        command.Parameters.AddWithValue("@IF_PERMISO", _rol_x_usuario.Usuario.User_name);
+
+
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
 
     }

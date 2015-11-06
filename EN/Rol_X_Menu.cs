@@ -30,7 +30,7 @@ namespace EN
             }
         }
 
-        internal MenuEn Menu
+        public MenuEn Menu
         {
             get
             {

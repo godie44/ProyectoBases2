@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace EN
 {
-    class Permiso_X_Rol
+    public class Permiso_X_Rol
     {
         RolEn rol;
         PermisoEn permiso;
 
+
+        public Permiso_X_Rol()
+        {
+            rol = new RolEn();
+            permiso = new PermisoEn();
+        }
 
         public RolEn Rol
         {

@@ -44,6 +44,7 @@
     <Compile Include="DepartamentoEn.cs" />
     <Compile Include="MenuEn.cs" />
     <Compile Include="PermisoEn.cs" />
+    <Compile Include="Permiso_X_Rol.cs" />
     <Compile Include="RolEn.cs" />
     <Compile Include="Rol_X_Menu.cs" />
     <Compile Include="Rol_X_Usuario.cs" />

@@ -346,7 +346,7 @@ namespace AD
                 {
                     using (SqlCommand command = con.CreateCommand())
                     {
-                        command.CommandText = "sp_roles_x_menu";
+                        command.CommandText = "sp_roles_x_usuario";
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
                         command.Parameters.AddWithValue("@IF_ROL", _rol_x_usuario.Rol.Id_rol);
@@ -362,6 +362,47 @@ namespace AD
             {
                 throw ex;
             }
+        }
+
+
+        public static List<MenuEn> ConsultaMenu(UsuariosEn _usuario)
+        {
+
+            List<MenuEn> response = new List<MenuEn>();
+            try
+            {
+                using (SqlConnection con = DataBaseManager.OpenSqlDatabase(user, pass, servidor, baseDatos))
+                {
+                    using (SqlCommand command = con.CreateCommand())
+                    {
+                        command.CommandText = "sp_consulta_menuxuser";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        
+                        command.Parameters.AddWithValue("@p_username", _usuario.User_name);
+
+
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                MenuEn tmp = new MenuEn();
+
+                                tmp.Cod_objeto = dr["cod_objeto"].ToString() ?? string.Empty;
+                                tmp.Id_menu = dr["id_menu"] != DBNull.Value ?Convert.ToInt32(dr["id_menu"]) : 0;
+
+                                response.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return response;
         }
 
 

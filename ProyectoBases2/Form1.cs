@@ -13,6 +13,8 @@ namespace ProyectoBases2
 {
     public partial class FrmPrincipal : Form
     {
+
+        public static bool sesion = false;
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -20,17 +22,33 @@ namespace ProyectoBases2
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmIniciarSesion frmIniciar = new FrmIniciarSesion();
-            frmIniciar.MdiParent = this;
 
-            frmIniciar.Show();
+            if (sesionToolStripMenuItem.Text.Equals("Iniciar Sesion"))
+            {
+                FrmIniciarSesion frmIniciar = new FrmIniciarSesion();
+                frmIniciar.MdiParent = this;
+
+                frmIniciar.Show();
+            }
+            else if(sesionToolStripMenuItem.Text.Equals("Cerrar Sesion"))
+            {
+                DialogResult result = MessageBox.Show("Desea cerrar sesion?", "Confirmation", System.Windows.Forms.MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    UsuarioLn.CerrarSesion();
+                }
+                else if (result == DialogResult.No)
+                {
+
+                }
+            }
         }
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool status = UsuarioLn.SesionStatus();
+            sesion = UsuarioLn.SesionStatus();
 
-            if (status)
+            if (sesion)
             {
                 sesionToolStripMenuItem.Text = "Cerrar Sesion";
             }

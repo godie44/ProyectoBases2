@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace LN
 {
-    class Encriptar
+    public class Encriptar
     {
 
         public static string MD5Hash(string _text)

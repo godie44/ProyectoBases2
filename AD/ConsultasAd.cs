@@ -404,6 +404,81 @@ namespace AD
 
             return response;
         }
+        public static List<DepartamentoEn> ConsultaDepartamentos()
+        {
+
+            List<DepartamentoEn> response = new List<DepartamentoEn>();
+            try
+            {
+                using (SqlConnection con = DataBaseManager.OpenSqlDatabase(user, pass, servidor, baseDatos))
+                {
+                    using (SqlCommand command = con.CreateCommand())
+                    {
+                        command.CommandText = "sp_consulta_departamentos";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                DepartamentoEn tmp = new DepartamentoEn();
+
+                                tmp.Desc_departamento = dr["DESC_DEPARTAMENTO"].ToString() ?? string.Empty;
+                                tmp.Id_departamento = dr["ID_DEPARTAMENTO"] != DBNull.Value ? Convert.ToInt32(dr["ID_DEPARTAMENTO"]) : 0;
+
+                                response.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return response;
+        }
+
+
+        public static List<RolEn> ConsultaRoles()
+        {
+
+            List<RolEn> response = new List<RolEn>();
+            try
+            {
+                using (SqlConnection con = DataBaseManager.OpenSqlDatabase(user, pass, servidor, baseDatos))
+                {
+                    using (SqlCommand command = con.CreateCommand())
+                    {
+                        command.CommandText = "sp_consulta_roles";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+                        using (SqlDataReader dr = command.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                RolEn tmp = new RolEn();
+
+                                tmp.Desc_rol = dr["id_rol"].ToString() ?? string.Empty;
+                                tmp.Id_rol = dr["DESC_ROL"] != DBNull.Value ? Convert.ToInt32(dr["id_rol"]) : 0;
+
+                                response.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return response;
+        }
+
 
 
     }
